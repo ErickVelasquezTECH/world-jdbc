@@ -1,22 +1,25 @@
 package org.example;
+
 import java.sql.*;
+import java.util.List;
 
 public class ProbandoJDBC {
+    private static final String bdatos = "jdbc:mysql://localhost:3306/world";
+    private static final String usuario = "root";
+    private static final String contrasena = "Sandia4you";
+
     public static void main(String[] args) {
-        String bdatos="jdbc:mysql://localhost:3306/world";
-        String usuario="root";
-        String contrasena="Sandia4you";
 
 
-        try(Connection conexion = DriverManager.getConnection(bdatos, usuario, contrasena);
-            Statement sentencia = conexion.createStatement();
-            ResultSet resul = sentencia.executeQuery("SELECT Name, CounTryCode FROM city LIMIT 5");
 
+        try (Connection conexion = DriverManager.getConnection(bdatos, usuario, contrasena);
+             Statement sentencia = conexion.createStatement();
+             ResultSet resul = sentencia.executeQuery("SELECT Name, CounTryCode FROM city LIMIT 5");
         ) {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             while (resul.next()) {
-                System.out.printf("%s, %s%n", resul.getString(1),resul.getString(2));
+                System.out.printf("%s, %s%n", resul.getString(1), resul.getString(2));
             }
 
 
@@ -27,4 +30,10 @@ public class ProbandoJDBC {
         }
 
     }
+
+
+    public List<String> showDatesLimit5()
+
+
 }
+
